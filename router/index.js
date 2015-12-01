@@ -73,6 +73,7 @@ router.get("/content-images/:id",contenido.existerut(function (result,req,res) {
 	}
 }))
 router.get("/imgcont/:id",contenido.colimgcontt)
+router.get("/primimgct/:id",contenido.primerimgcont)
 
 router.post("/mmoadm",admin.ingreso)
 router.post("/newmenu/:pla",contenido.menu)

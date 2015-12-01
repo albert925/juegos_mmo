@@ -1,12 +1,12 @@
 var conexion=require("../base_datos")
 module.exports.tods=function (callback) {
-	var reg="SELECT * from menu order by id_mn desc"
+	var reg="SELECT * from menu order by id_mn asc"
 	conexion.getConnection(buscar(reg,function (resultado) {
 		callback(resultado)
 	}))
 }
 module.exports.todcont=function (callback) {
-	var reg="SELECT * from contenido order by id_ct desc"
+	var reg="SELECT * from contenido order by id_ct asc"
 	conexion.getConnection(buscardos(reg,function (resul) {
 		callback(resul)
 	}))

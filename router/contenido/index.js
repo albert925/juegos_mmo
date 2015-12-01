@@ -92,6 +92,12 @@ module.exports.imagescont=function (id,img,callback) {
 		callback(result)
 	})
 }
+module.exports.primerimgcont=function (req,res) {
+	var id=req.params.id
+	imagesv.imgprimer(id,function (file) {
+		res.json(file)
+	})
+}
 module.exports.cntigmborrar=function (req,res) {
 	var id=req.params.id
 	borrar.borrimgcont(id,function (resl) {

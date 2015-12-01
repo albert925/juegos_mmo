@@ -15,16 +15,24 @@ function writeslect (id,name) {
 	return html
 }
 function writecontadm (id,tt) {
-	var html='<figure id="caj'+id+'">'
-		html+='<h2>'+tt+'</h2>'
-		html+='<img src="images/predeterminado.png" alt="'+tt+'" />'
-		html+='<figcaption class="columinput">'
-			html+='<a id="dsea" href="/mofcontent/'+id+'">Modificar</a>'
-			html+='<a id="dsea" href="/content-images/'+id+'">Imágenes</a>'
-			html+='<a class="dell" data-id="'+id+'" href="/borrar_conte">borrar</a>'
-		html+='</figcaption>'
-	html+='</figure>'
-	return html
+	$.get("/primimgct/"+id,function (yer) {
+		if (yer==2) {
+			var img="images/predeterminado.png"
+		}
+		else{
+			var img="images/contenido/"+yer
+		}
+		var html='<figure id="caj'+id+'">'
+			html+='<h2>'+tt+'</h2>'
+			html+='<img src="'+img+'" alt="'+tt+'" />'
+			html+='<figcaption class="columinput">'
+				html+='<a id="dsea" href="/mofcontent/'+id+'">Modificar</a>'
+				html+='<a id="dsea" href="/content-images/'+id+'">Imágenes</a>'
+				html+='<a class="dell" data-id="'+id+'" href="/borrar_conte">borrar</a>'
+			html+='</figcaption>'
+		html+='</figure>'
+		$(".Tconte").prepend(html).show("slow",duracion)
+	})
 }
 function es_imagen (tipederf) {
 	switch(tipederf.toLowerCase()){
@@ -194,8 +202,6 @@ function mostrarcontenido (res) {
 			var id=date[0]
 			var tt=date[2]
 			var article=writecontadm(id,tt)
-			var $article=$(article).show("slow",duracion)
-			$(".Tconte").prepend(article)
 		}
 	}
 }
@@ -207,7 +213,4 @@ function relimgcont (res) {
 	else{
 		console.log(res)
 	}
-}
-function mostrarimgcont (res) {
-	// body...
 }
