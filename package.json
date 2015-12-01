@@ -1,0 +1,37 @@
+{
+  "name": "juegos_mmo",
+  "version": "0.1.0",
+  "description": "pagina de lista video juegos mmoprpg",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "node server.js",
+    "build-js": "browserify cliente/index.js > public/js/app.js",
+    "start": "npm run build-js && npm run serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/albert925/juegos_mmo.git"
+  },
+  "keywords": [
+    "juegos",
+    "mmorpg",
+    "nodejs"
+  ],
+  "author": "Albert Arias",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3",
+    "http-body-parse": "^2.0.1",
+    "jquery": "^2.1.4",
+    "jquery-background-video": "^1.0.0",
+    "md5": "^2.0.0",
+    "multer": "^1.1.0",
+    "mysql": "^2.9.0",
+    "sha1": "^1.1.1"
+  },
+  "devDependencies": {
+    "browserify": "^12.0.1"
+  }
+}

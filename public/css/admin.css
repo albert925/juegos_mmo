@@ -1,0 +1,88 @@
+h1{
+	padding: 2em 0;
+	text-align: center;
+}
+h2{
+	padding: 1em 0;
+	text-align: center;
+}
+#dsea{
+	background: #023481;
+	color: #fff;
+	text-align: center;
+	text-decoration: none;
+}
+#dsea:hover,#dsea:active{
+	background: #2691ED;
+}
+#mnad{
+	display: flex;
+	justify-content: space-around;
+}
+	#mnad a{
+		color: #003482;
+		padding: 0 0.5em;
+		text-decoration: none;
+	}
+	#mnad a:hover,#mnad a:active{
+		background: #003482;
+		border-radius: 0 0 5px 5px;
+		color: #fff;
+		transform: ;
+	}
+.cajolc{display: none;}
+.columinput{
+	padding: 0;
+}
+.dell{
+	background: #E44B23;
+	color: #fff;
+	text-align: center;
+	text-decoration: none;
+}
+.dell:hover,.dell:active{
+	background: #8F0000;
+}
+.fla{
+	display: flex;
+	justify-content: space-between;
+}
+.flxB{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+	.flxB article{
+		margin-bottom: 1em
+	}
+	.flxB figure{
+		margin-bottom: 1em;
+		width: 30%;
+	}
+@media (max-width: 800px){
+	#mnad{
+		flex-direction: column;
+		text-align: center;
+	}
+		#mnad a{
+			border-bottom: 1px solid #B2B2B2;
+			border-radius: 0;
+			padding: 0.5em 0;
+		}
+	.fla,.flxB{
+		flex-wrap: wrap;
+		justify-content: space-around;
+	}
+		.flxB figure{
+			width: 40%;
+		}
+}
+@media (max-width: 600px){
+	.fla,.flxB{
+		flex-direction: column;
+	}
+	.flxB figure{
+		margin: 1em auto;
+		width: 90%;
+	}
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<meta name="description" content="Ingresar como adminsitrador" />
+	<meta name="keywords" content="juegos, mmorpg, mmo, online, juegos web, juegos pc" />
+	<title>Adminsitrador |Juegos mmorpg</title>
+	<link rel="icon" type="images/ico" href="images/icon.png" />
+	<link rel="stylesheet" href="css/normalize.css" />
+	<link rel="stylesheet" href="css/iconos/style.css" />
+	<link rel="stylesheet" href="http://css-spinners.com/css/spinner/plus.css" />
+	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="css/admin.css" />
+</head>
+<body>
+	<section class="container">
+		<nav id="mnV" class="mnnv">
+			<a href="/administrador">Inicio</a>
+			<a href="/menu">Menu</a>
+			<a href="/contenido">Contenido</a>
+			<a href="/">Salir</a>
+		</nav>
+		<header class="heaP">
+			<div class="cent">
+				<figure id="logo">
+					<a href="/">
+						<img src="images/logo.png" alt="logo" />
+					</a>
+				</figure>
+				<nav id="mnP" class="mnnv">
+					<a class="sily" href="/administrador">Inicio</a>
+					<a href="/menu">Menu</a>
+					<a href="/contenido">Contenido</a>
+					<a href="/mmoadm">Salir</a>
+					<div id="men_mv">
+						<span class="icon-menu"></span>
+					</div>
+				</nav>
+			</div>
+		</header>
+		<section>
+			<article class="automargen">
+				<h1>Administrador</h1>
+				<article class="fla">
+					<article>
+						<h2>Usuario</h2>
+						<form action="/user" method="post" class="columinput">
+							<input type="text" id="fus" required />
+							<div id="txA"></div>
+							<input type="submit" value="Modificar" />
+						</form>
+					</article>
+					<article>
+						<h2>Contraseña</h2>
+						<form action="/pass" class="columinput">
+							<label for="coac">*<b>Contraseña actual</b></label>
+							<input type="password" id="coac" required />
+							<label for="cona">*<b>Contraseña Nueva</b></label>
+							<input type="password" id="cona" required />
+							<label for="conb">*<b>Repite la contraseña nueva</b></label>
+							<input type="password" id="conb" required />
+							<div id="txB"></div>
+							<input type="submit" value="Modificar">
+						</form>
+					</article>
+				</article>
+			</article>
+		</section>
+		<footer>
+			<div class="creditos">
+				<a href="http://es.bigpoint.com/" target="_blank">BIGPOINT.COM</a> 
+				<a href="http://es.gameforge.com" target="_blank">GAMEFORGE</a>
+			</div>
+		</footer>
+	</section>
+	<script src="js/app.js"></script>
+</body>
+</html>

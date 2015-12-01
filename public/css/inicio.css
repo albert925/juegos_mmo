@@ -1,0 +1,7 @@
+footer{
+	position: relative;
+	z-index: 100;
+}
+#mnV{
+	z-index: 101;
+}
