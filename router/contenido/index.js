@@ -109,3 +109,14 @@ module.exports.cntigmborrar=function (req,res) {
 		}
 	})
 }
+module.exports.contborrar=function (req,res) {
+	var id=req.params.id
+	borrar.borrcontent(id,function (resl) {
+		if (resl==null) {
+			res.json({r:2,id:id})
+		}
+		else{
+			res.json({r:resl,id:id})
+		}
+	})
+}

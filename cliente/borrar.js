@@ -16,6 +16,7 @@ function resultadoborrado (ress) {
 		console.log(ress)
 	}
 	else{
+		alert(ress)
 		console.log(ress)
 	}
 }

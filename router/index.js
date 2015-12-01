@@ -83,6 +83,7 @@ router.post("/newcontenido",contenido.ingresocont)
 router.post("/idcont/:id",contenido.colocar)
 router.post("/mofconte",contenido.mfcont)
 router.post("/borrar_imgcont/:id",contenido.cntigmborrar)
+router.post("/borrar_conte/:id",contenido.contborrar)
 router.post("/newimagect",upload.single("gimg"),function (req,res) {
 	var id=req.body.idr
 	var image=req.file.filename
