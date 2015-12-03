@@ -1,4 +1,4 @@
-footer{
+footer,.container section{
 	position: relative;
 	z-index: 100;
 }

@@ -74,6 +74,9 @@ router.get("/content-images/:id",contenido.existerut(function (result,req,res) {
 }))
 router.get("/imgcont/:id",contenido.colimgcontt)
 router.get("/primimgct/:id",contenido.primerimgcont)
+router.get("/juego/:name",contenido.nammenuexist(function (result,req,res) {
+	res.json(result)
+}))
 
 router.post("/mmoadm",admin.ingreso)
 router.post("/newmenu/:pla",contenido.menu)

@@ -28,7 +28,7 @@ module.exports.borrcontent=function (id,callback) {
 	var sacimg="SELECT * from images_ct where ct_id="+id
 	var borr="DELETE from contenido where id_ct="+id
 	conexion.getConnection(busimgdell(sacimg,function (result) {
-		if (result==3) {
+		if (result==3 || result==2) {
 			conexion.getConnection(registro(borr,function (resl) {
 				callback(resl)
 			}))

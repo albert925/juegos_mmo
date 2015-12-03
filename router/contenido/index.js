@@ -120,3 +120,9 @@ module.exports.contborrar=function (req,res) {
 		}
 	})
 }
+module.exports.nammenuexist=function (callback) {
+	return function (req,res) {
+		var namemn=req.params.name
+		callback(namemn,req,res)
+	}
+}

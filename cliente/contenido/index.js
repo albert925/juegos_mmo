@@ -34,6 +34,10 @@ function writecontadm (id,tt) {
 		$(".Tconte").prepend(html).show("slow",duracion)
 	})
 }
+function writemenus (name) {
+	var html='<a href="/juego/'+name+'">'+name+'</a>'
+	return html
+}
 function es_imagen (tipederf) {
 	switch(tipederf.toLowerCase()){
 		case 'jpg':
@@ -158,6 +162,9 @@ module.exports.subirimage=function () {
 		}
 	}
 }
+module.exports.meunP=function () {
+	$.get("/menu/todos",menuPrin)
+}
 function resulmenu (res) {
 	$("#txA center").remove()
 	if (res.r==2) {
@@ -212,5 +219,13 @@ function relimgcont (res) {
 	}
 	else{
 		console.log(res)
+	}
+}
+function menuPrin (res) {
+	for (var i = 0; i < res.length; i++) {
+		var date=res[i].split("-")
+		var id=date[0]
+		var name=date[1]
+		$(".colmnhr").prepend(writemenus(name))
 	}
 }
