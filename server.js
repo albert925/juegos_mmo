@@ -8,6 +8,7 @@ var passport=require("passport")
 var socketio = require("socket.io")
 var archivos=require("./router/archivos")
 var admin=require("./router")
+var port = process.env.PORT || 3000
 
 var app=express()
 
@@ -43,5 +44,6 @@ io.on("connection",function (socket) {
 	})
 })
 
-servidor.listen(3000)
-console.log("servidor 3000")
+servidor.listen(port,function () {
+	console.log("servidor en "+port)
+})

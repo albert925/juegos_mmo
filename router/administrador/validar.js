@@ -12,7 +12,6 @@ module.exports.val=function (req,res,a,b) {
 	})
 }
 module.exports.valpasst=function (user,contr,callback) {
-	console.log(user+"-"+contr)
 	var salt="sanae-pequena-nina-7-years$/"
 	var pass=sha1(md5(salt+contr))
 	var reg="SELECT * from administrador where user_adm='"+user+"' and pass_adm='"+pass+"'"

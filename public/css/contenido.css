@@ -1,0 +1,37 @@
+h1{
+	padding: 1em 0;
+	text-align: center;
+}
+.Tcong{
+	display: flex;
+	justify-content: space-around;
+	padding: 2em 0;
+}
+	.Tcong figure{
+		width: 25%;
+	}
+	.Tcong figcaption{
+		width: 70%;
+	}
+	.Tcong .fecha{
+		padding: 1em 0;
+		font-size: 10px;
+		font-style: italic;
+	}
+@media screen and (max-width: 800px){
+		.Tcong figure{
+			width: 35%;
+		}
+		.Tcong figcaption{
+			width: 60%;
+		}
+}
+@media screen and (max-width: 400px){
+	.Tcong{
+		flex-direction: column;
+	}
+		.Tcong figure,.Tcong figcaption{
+			margin: 1em auto;
+			width: 90%;
+		}
+}

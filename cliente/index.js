@@ -19,7 +19,9 @@ function inicio_pagina () {
 	$(".contchat").on("click","#btenv",chat.envmensaje)
 	$("aduio").remove()
 	contenido.colocarmenu()
-	contenido.colocarcont()
+	if ($("#Tcot").length) {
+		contenido.colocarcont()
+	}
 	if ($(".hscroll").length) {
 		$(window).scroll(animar.header)
 	}

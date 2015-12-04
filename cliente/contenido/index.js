@@ -24,7 +24,7 @@ function writecontadm (id,tt) {
 		}
 		var html='<figure id="caj'+id+'">'
 			html+='<h2>'+tt+'</h2>'
-			html+='<img src="'+img+'" alt="'+tt+'" />'
+			html+='<img src="/'+img+'" alt="'+tt+'" />'
 			html+='<figcaption class="columinput">'
 				html+='<a id="dsea" href="/mofcontent/'+id+'">Modificar</a>'
 				html+='<a id="dsea" href="/content-images/'+id+'">Imágenes</a>'

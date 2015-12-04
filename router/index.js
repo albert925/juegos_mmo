@@ -14,19 +14,14 @@ var router=express.Router()
 //y password para que lo tome y lo valide aca en el servidor
 //con los mismos parámertros
 passport.use(new LocalStrategy(function (username,password,done) {
-	if (username === "admin" && password === "contra") {
-		return done(null,{user:"usuario",name:"nombre"})
-	}
-	done(null, false,{message:"Usuario o contraseña incorrectos"})
-	/*admin.ingresoPasst(usad,psad,function (result) {
-		console.log(result+"//")
+	admin.ingresoPasst(username,password,function (result) {
 		if (result=="1") {
 			done(null, false,{message:"Usuario o contraseña incorrectos"})
 		}
 		else{
-			done(null,{user:result})
+			done(null,{idad:result.idad,usad:result.user_adm,tpad:result.tp_adm})
 		}
-	})*/
+	})
 }))
 passport.serializeUser(function (user,done) {
 	done(null,user)
@@ -50,8 +45,14 @@ var upload=multer({storage:storage})
 router.get("/mmoadm",function (req,res) {
 	archivos.normal(req,res,"admin/index.html")
 })
+router.get("/mmoerr",function (req,res) {
+	archivos.normal(req,res,"admin/error1.html")
+})
+router.get("/sescad",function (req,res) {
+	archivos.normal(req,res,"admin/error2.html")
+})
 router.get("/administrador",ensureAuth,function (req,res) {
-	var idad=req.user
+	var idad=req.user.idad
 	console.log("//"+idad)
 	archivos.normal(req,res,"admin/admin.html")
 })
@@ -104,32 +105,47 @@ router.get("/content-images/:id",ensureAuth,contenido.existerut(function (result
 router.get("/imgcont/:id",contenido.colimgcontt)
 router.get("/primimgct/:id",contenido.primerimgcont)
 router.get("/juego/:name",contenido.nammenuexist(function (result,req,res) {
-	res.json(result)
+	if (result == 1) {
+		res.format({
+			"text/plain":function () {
+				res.status(400)
+				res.send("El contenido no existe")
+			}
+		})
+	}
+	else{
+		if (result == 2) {
+			archivos.normal(req,res,"cont/index.html")
+		}
+		else{
+			res.format({
+				"text/plain":function () {
+					res.status(500)
+					res.send("ha ocurrido un error '"+result)
+				}
+			})
+		}
+	}
 }))
+router.get("/contenido-menu/:name",contenido.nammenu)
 
-//router.post("/mmoadm",admin.ingreso)
-/*router.post("/login",function (req,res) {
-	admin.ingresoPasst(req.body.usad,req.body.psad,function (resl) {
-		console.log(resl)
-	})
-})*/
-router.post("/login",passport.authenticate("local",{
-	successRedirect:"/administrador",
-	failureRedirect:"/mmoadm"
-}))
 router.get("/logout",function (req,res) {
 	req.logout()
 	res.redirect("/mmoadm")
 })
+router.post("/login",passport.authenticate("local",{
+	successRedirect:"/administrador",
+	failureRedirect:"/mmoerr"
+}))
 
-router.post("/newmenu/:pla",contenido.menu)
-router.post("/mofmenu",contenido.mfmenu)
-router.post("/borrar_menu/:id",contenido.menuborrar)
-router.post("/newcontenido",contenido.ingresocont)
+router.post("/newmenu/:pla",ensureAuth,contenido.menu)
+router.post("/mofmenu",ensureAuth,contenido.mfmenu)
+router.post("/borrar_menu/:id",ensureAuth,contenido.menuborrar)
+router.post("/newcontenido",ensureAuth,contenido.ingresocont)
 router.post("/idcont/:id",contenido.colocar)
-router.post("/mofconte",contenido.mfcont)
-router.post("/borrar_imgcont/:id",contenido.cntigmborrar)
-router.post("/borrar_conte/:id",contenido.contborrar)
+router.post("/mofconte",ensureAuth,contenido.mfcont)
+router.post("/borrar_imgcont/:id",ensureAuth,contenido.cntigmborrar)
+router.post("/borrar_conte/:id",ensureAuth,contenido.contborrar)
 router.post("/newimagect",upload.single("gimg"),function (req,res) {
 	var id=req.body.idr
 	var image=req.file.filename
@@ -144,7 +160,7 @@ function ensureAuth (req,res,next) {
 	if (req.isAuthenticated()) {
 		return next()
 	}
-	res.redirect("/mmoadm")
+	res.redirect("/sescad")
 }
 
 module.exports=router

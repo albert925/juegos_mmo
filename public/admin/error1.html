@@ -5,21 +5,35 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1" />
 	<meta name="description" content="Ingresar como adminsitrador" />
 	<meta name="keywords" content="juegos, mmorpg, mmo, online, juegos web, juegos pc" />
-	<title>adminsitrar menus |Juegos mmorpg</title>
+	<title>Ingreso incorrecto |Juegos mmorpg</title>
 	<link rel="icon" type="images/ico" href="images/icon.png" />
 	<link rel="stylesheet" href="css/normalize.css" />
 	<link rel="stylesheet" href="css/iconos/style.css" />
 	<link rel="stylesheet" href="http://css-spinners.com/css/spinner/plus.css" />
 	<link rel="stylesheet" href="css/style.css" />
-	<link rel="stylesheet" href="css/admin.css" />
+	<style type="text/css">
+		h1{
+			margin:2em;
+			text-align:center;
+		}
+		p{
+			padding:2em 0;
+		}
+	</style>
+	<script type="text/javascript">
+		setTimeout(direcionar,1500)
+		function direcionar () {
+			window.location.href="/mmoadm"
+		}
+	</script>
 </head>
 <body>
 	<section class="container">
 		<nav id="mnV" class="mnnv">
-			<a href="/administrador">Inicio</a>
-			<a href="/menu">Menu</a>
-			<a href="/contenido">Contenido</a>
-			<a href="/logout">Salir</a>
+			<a href="">menu1</a>
+			<a href="#">menu2</a>
+			<a href="#">menu3</a>
+			<a href="/chat">Chat</a>
 		</nav>
 		<header class="heaP">
 			<div class="cent">
@@ -29,34 +43,22 @@
 					</a>
 				</figure>
 				<nav id="mnP" class="mnnv">
-					<a href="/administrador">Inicio</a>
-					<a class="sily" href="/menu">Menu</a>
-					<a href="/contenido">Contenido</a>
-					<a href="/logout">Salir</a>
+					<a href="">menu1</a>
+					<a href="#">menu2</a>
+					<a href="#">menu3</a>
+					<a href="/chat">Chat</a>
 					<div id="men_mv">
 						<span class="icon-menu"></span>
 					</div>
 				</nav>
 			</div>
 		</header>
-		<nav id="mnad">
-			<a id="mnab" href="#">Nuevo menú</a>
-		</nav>
-		<section>	
-			<article class="cajolc">
-				<article class="automargen">
-					<form action="/newmenu" method="psot" class="columinput">
-						<h2>Nuevo menu</h2>
-						<input type="text" id="mnnv" required />
-						<div id="txA"></div>
-						<input type="submit" value="Ingresar" id="nvmn" />
-					</form>
-				</article>
-			</article>
+		<section>
 			<article class="automargen">
-				<h1>Menús</h1>
-				<article id="Tmns" class="flxB Tmns">
-				</article>
+				<h1>Error autenticación</h1>
+				<p>
+					Usuario o contraseña incorrectos
+				</p>
 			</article>
 		</section>
 		<footer>

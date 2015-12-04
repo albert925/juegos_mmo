@@ -123,6 +123,24 @@ module.exports.contborrar=function (req,res) {
 module.exports.nammenuexist=function (callback) {
 	return function (req,res) {
 		var namemn=req.params.name
-		callback(namemn,req,res)
+		mosmenu.exismenman(namemn,function (resl) {
+			callback(resl,req,res)
+		})
 	}
+}
+module.exports.nammenu=function (req,res) {
+	var namct=req.params.name
+	mosmenu.contmenu(namct,function (resl) {
+		if (resl == "no") {
+			res.json("no")
+		}
+		else{
+			if (resl == 2) {
+				res.json("no")
+			}
+			else{
+				res.json(resl)
+			}
+		}
+	})
 }
