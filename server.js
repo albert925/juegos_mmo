@@ -8,6 +8,7 @@ var passport=require("passport")
 var socketio = require("socket.io")
 var archivos=require("./router/archivos")
 var admin=require("./router")
+var faceb=require("./facebo")
 var port = process.env.PORT || 3000
 
 var app=express()
@@ -29,6 +30,7 @@ app.use(express.static(path.join(__dirname,"public")))
 app.use(bodyparse.urlencoded({extended: false}))
 app.use(bodyparse.json())
 app.use(admin)
+app.use(faceb)
 
 app.get("/",function (req,res) {
 	res.render("index.html")
