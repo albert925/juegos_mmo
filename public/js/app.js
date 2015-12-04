@@ -90,6 +90,13 @@ socket.emit("ping")//enviar
 		console.log("pong")
 	})
 */
+function notificaiconsoportado() {
+	return (!!window.Notification)
+}
+module.exports.noticiacion= function (us,msj) {
+	Notification.requestPermission();
+}
+
 function writeusuario () {
 	if (localStorage.users) {
 		var user=localStorage.users
@@ -144,9 +151,19 @@ module.exports.envmensaje=function (ev) {
 }
 module.exports.colocarmensajes=function () {
 	socket.on("mensaje",function (resms) {
-		console.log(resms)
+		var opciones={
+			body:resms.us+": "+resms.ms,
+			icon: "/images/icon.png"
+		}
+		//console.log(resms)
 		$(".cajaTms").prepend(writcadmsj(resms.us,resms.ms))
 		$(".cdjms:first").animate({width:"100%",padding:"1.5em 0 1.5em 1m"},500)
+		$('<audio src="/audio/sonido.wav" autoplay type="audio/wav"></aduio>').appendTo("body")
+		var notif=new Notification("mensaje",opciones)
+		if (window.navigator && window.navigator.vibrate) {
+			navigator.vibrate (1000)
+		}
+		//setTimeout(notif.close, 3000);
 	})
 }
 },{"jquery":8,"socket.io-client":9}],5:[function(require,module,exports){
@@ -414,6 +431,7 @@ function inicio_pagina () {
 	$("#nvig").on("click",contenido.subirimage)
 	$(".contchat").on("click","#ingnm",chat.ingreusuario)
 	$(".contchat").on("click","#btenv",chat.envmensaje)
+	$("aduio").remove()
 	contenido.colocarmenu()
 	contenido.colocarcont()
 	if ($(".hscroll").length) {
@@ -426,6 +444,7 @@ function inicio_pagina () {
 		chat.colocarusers()
 		chat.colocarmensajes()
 	}
+	chat.noticiacion()
 }
 },{"./admin":1,"./animar":2,"./borrar.js":3,"./chat":4,"./contenido":6,"jquery":8}],8:[function(require,module,exports){
 /*!

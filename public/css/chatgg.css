@@ -10,6 +10,7 @@ h1{
 	padding:1.5em 0 1.5em 0;
 	position: relative;
 	width: 0;
+	z-index: 1;
 }
 	.cdjms div{
 		align-items: center;
@@ -54,6 +55,14 @@ h1{
 			background: #F5F4F3;
 			color: #717170;
 		}
+@media screen and (max-width: 800px){
+	.cdjms{
+		padding: 3em 0 3em 1em;
+	}
+		.cdjms div{
+			top: 0;
+		}
+}
 @media screen and (max-width: 500px){
 	h1{
 		font-size: 20px;

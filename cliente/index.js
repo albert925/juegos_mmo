@@ -17,6 +17,7 @@ function inicio_pagina () {
 	$("#nvig").on("click",contenido.subirimage)
 	$(".contchat").on("click","#ingnm",chat.ingreusuario)
 	$(".contchat").on("click","#btenv",chat.envmensaje)
+	$("aduio").remove()
 	contenido.colocarmenu()
 	contenido.colocarcont()
 	if ($(".hscroll").length) {
@@ -29,4 +30,5 @@ function inicio_pagina () {
 		chat.colocarusers()
 		chat.colocarmensajes()
 	}
+	chat.noticiacion()
 }
