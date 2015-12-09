@@ -17,6 +17,7 @@ function inicio_pagina () {
 	$("#nvig").on("click",contenido.subirimage)
 	$(".contchat").on("click","#ingnm",chat.ingreusuario)
 	$(".contchat").on("click","#btenv",chat.envmensaje)
+	$(".envmsjred").on("click","#btpv",chat.envmengenprv)
 	$("aduio").remove()
 	contenido.colocarmenu()
 	if ($("#Tcot").length) {
@@ -31,6 +32,10 @@ function inicio_pagina () {
 	if ($(".contchat").length) {
 		chat.colocarusers()
 		chat.colocarmensajes()
+	}
+	if ($(".contYUchat").length) {
+		chat.obtenerusIngr()
+		chat.colocarmensprivado()
 	}
 	chat.noticiacion()
 }

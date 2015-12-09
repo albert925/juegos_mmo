@@ -9,6 +9,7 @@ var socketio = require("socket.io")
 var archivos=require("./router/archivos")
 var admin=require("./router")
 var faceb=require("./facebo")
+var usuariBD=require("./usuario")
 var port = process.env.PORT || 3000
 
 var app=express()
@@ -43,6 +44,18 @@ io.on("connection",function (socket) {
 	//console.log("conecto "+socket.id)
 	socket.on("mensaje",function (msg) {
 		socket.broadcast.emit("mensaje",msg)
+	})
+	socket.on("chgen",function (fas) {
+		usuariBD.datosus(fas.id,function (resbd) {
+			console.log(fas.id+"-"+fas.ms)
+			console.log(resbd.idrd+"-"+fas.ms)
+			var mesji={
+				id:fas.id,
+				idf:resbd.idrd,
+				mens:fas.ms
+			}
+			io.sockets.emit("chgen",mesji)
+		})
 	})
 })
 

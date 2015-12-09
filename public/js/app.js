@@ -124,6 +124,17 @@ function writcadmsj (users,msj) {
 	html+='</div>'
 	return html
 }
+function writdosmsj (id,fa,msj) {
+	var html='<div id="mj'+id+'" class="cadjms">'
+				html+='<div class="avacj">'
+					html+='<figure style="background-image:url(https://graph.facebook.com/'+fa+'/picture);"></figure>'
+				html+='</div>'
+				html+='<div class="texmsj">'
+					html+=msj
+				html+='</div>'
+	html+='</div>'
+	return html
+}
 module.exports.colocarusers=function () {
 	$(".envmsj").html(writeusuario)
 }
@@ -164,6 +175,34 @@ module.exports.colocarmensajes=function () {
 			navigator.vibrate (1000)
 		}
 		//setTimeout(notif.close, 3000);
+	})
+}
+module.exports.obtenerusIngr=function () {
+	var urlobt=document.location.href
+	var idurl=urlobt.split("/")
+	var idrlru=idurl[4].split("#")
+	console.log(idrlru[0])
+	$(".envmsjred input[type=submit]").attr("data-id",idrlru[0]+"-"+0)
+}
+module.exports.envmengenprv=function (ev) {
+	var idcht=$(this).attr("data-id")
+	var geoprv=idcht.split("-")
+	var msejpv=$("#msjxx").val()
+	if (geoprv[1] == 0 || geoprv[1] == "0") {
+		var msjpg=$("#msjxx").val()
+		socket.emit("chgen",{id:geoprv[0],ms:msejpv})
+		$("#msjxx").val("")
+		$("#msjxx").focus()
+		return false
+	}
+	return false
+}
+module.exports.colocarmensprivado=function () {
+	console.log(44)
+	socket.on("chgen",function (resms) {
+		$(".cjtcms").prepend(writdosmsj(resms.id,resms.idf,resms.mens))
+		$('<audio src="/audio/sonido.wav" autoplay type="audio/wav"></aduio>').appendTo("body")
+		console.log(resms)
 	})
 }
 },{"jquery":8,"socket.io-client":9}],5:[function(require,module,exports){
@@ -431,6 +470,7 @@ function inicio_pagina () {
 	$("#nvig").on("click",contenido.subirimage)
 	$(".contchat").on("click","#ingnm",chat.ingreusuario)
 	$(".contchat").on("click","#btenv",chat.envmensaje)
+	$(".envmsjred").on("click","#btpv",chat.envmengenprv)
 	$("aduio").remove()
 	contenido.colocarmenu()
 	if ($("#Tcot").length) {
@@ -445,6 +485,10 @@ function inicio_pagina () {
 	if ($(".contchat").length) {
 		chat.colocarusers()
 		chat.colocarmensajes()
+	}
+	if ($(".contYUchat").length) {
+		chat.obtenerusIngr()
+		chat.colocarmensprivado()
 	}
 	chat.noticiacion()
 }
