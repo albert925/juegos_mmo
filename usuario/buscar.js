@@ -7,7 +7,7 @@ module.exports.general=function (id,callback) {
 	}))
 }
 module.exports.conectados=function (callback) {
-	var reg="SELECT * from usuarios where con_us='1' order by id_us asc"
+	var reg="SELECT * from usuarios order by id_us asc"
 	conexion.getConnection(bustodoconect(reg,function (result) {
 		callback(result)
 	}))
@@ -54,7 +54,8 @@ function qerudos (callback) {
 				var datus={
 					id:result[i].id_us,
 					idf:result[i].id_red,
-					name:result[i].nam_us
+					name:result[i].nam_us,
+					conec:result[i].con_us
 				}
 				userC.push(datus)
 			}

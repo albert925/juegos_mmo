@@ -134,12 +134,22 @@ module.exports.colocarmensprivado=function () {
 	})
 }
 module.exports.usersConects=function () {
+	mostrarconectados()
+}
+function mostrarconectados () {
 	socket.emit("conects")
 	socket.on("conects",function (date) {
 		for (var icox = 0; icox < date.length; icox++) {
-			date[icox]
 			console.log(date[icox])
-			$(".chatscd").prepend(wriconectados(date[icox].id,date[icox].idf,date[icox].name))
+			if (date[icox].conec=="1") {
+				if (!$("#usc_"+date[icox].id).length) {
+					$(".chatscd").prepend(wriconectados(date[icox].id,date[icox].idf,date[icox].name))
+				}
+			}
+			else{
+				$("#usc_"+date[icox].id).remove()
+			}
 		}
 	})
+	setTimeout(mostrarconectados, 1000)
 }

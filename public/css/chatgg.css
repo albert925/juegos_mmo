@@ -140,6 +140,8 @@ h1{
 	}
 	.conti-msj .chatscd{
 		border:1px solid blue;
+		height: 500px;
+		overflow-y: auto;
 		width: 20%;
 	}
 .ous{

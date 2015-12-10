@@ -42,9 +42,9 @@ faceb.get("/auth/facebook/callback",passport.authenticate("facebook",{
 	successRedirect: "/chat/bienvenido",
 	failureRedirect: '/chat/erroface'
 }))
-faceb.get("/chat/logout",ensureAuth,function (req,res) {
-	var usid=req.user.idb
-	userbd.desconectar(usid)
+faceb.get("/chat/logout",function (req,res) {
+	//var usid=req.user.idb
+	//userbd.desconectar(usid)
 	req.logout()
 	res.redirect("/chat")
 })
