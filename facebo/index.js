@@ -3,7 +3,7 @@ var passport = require("passport")
 var facebookStra = require("passport-facebook")
 var archivos = require("../router/archivos")
 var userbd = require("./usuario.js")
-
+var otrosUS = require("../usuario")
 var faceb = express.Router()
 
 passport.use(new facebookStra({
@@ -50,12 +50,17 @@ faceb.get("/chat/logout",function (req,res) {
 })
 faceb.get("/chat/bienvenido",ensureAuth,function (req,res) {
 	var uslk=req.user.idb
-	console.log(uslk)
+	console.log(uslk+"//id de auth")
 	res.redirect("/chat/"+uslk)
 })
 faceb.get("/chat/:id",ensureAuth,function (req,res) {
 	var idR=req.params.id
 	archivos.normal(req,res,"chatauten.html")
+})
+faceb.post("/us/td",ensureAuth,function (req,res) {
+	otrosUS.conects(function (result) {
+		res.json(result)
+	})
 })
 function ensureAuth (req,res,next) {
 	if (req.isAuthenticated()) {

@@ -43,11 +43,21 @@ app.get("/chat",function (req,res) {
 io.on("connection",function (socket) {
 	//console.log("conecto "+socket.id)
 	socket.on("conects",function (us) {
-		console.log(us.id)
-		usuariBD.desconect(us.id)
-		usuariBD.conects(function (resl) {
-			io.sockets.emit("conects",resl)
-		})
+		console.log(us)
+		if (us.se == 1) {
+			usuariBD.datosus(us.id,function (resus) {
+				socket.broadcast.emit("conects",{
+					id:us.id,
+					se:us.se,
+					name:resus.name,
+					idf:resus.idrd
+				})
+			})
+		}
+		else{
+			usuariBD.desconect(us.id)
+			socket.broadcast.emit("conects",us)
+		}
 	})
 	socket.on("mensaje",function (msg) {
 		socket.broadcast.emit("mensaje",msg)

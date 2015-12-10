@@ -110,6 +110,7 @@ module.exports.obtenerusIngr=function () {
 	//console.log(idrlru[0])
 	$(".envmsjred input[type=submit]").attr("data-id",idrlru[0]+"-"+0)
 	$("#redicht").attr("data-id",idrlru[0])
+	socket.emit("conects",{id:idrlru[0],se:1})
 }
 module.exports.envmengenprv=function (ev) {
 	var idcht=$(this).attr("data-id")
@@ -139,7 +140,7 @@ module.exports.usersConects=function () {
 	mostrarconectados()
 }
 function mostrarconectados () {
-	socket.on("conects",function (date) {
+	$.post("/us/td",function (date) {
 		for (var icox = 0; icox < date.length; icox++) {
 			if (date[icox].conec=="1") {
 				if (!$("#usc_"+date[icox].id).length) {
@@ -151,6 +152,17 @@ function mostrarconectados () {
 			}
 		}
 	})
+	socket.on("conects",function (us) {
+		if (us.se==2) {
+			$("#usc_"+us.id).remove()
+		}
+		else{
+			if(!us == undefined || !us == ""){
+				console.log(us)
+				$(".chatscd").prepend(wriconectados(us.id,us.idf,us.name))
+			}
+		}
+	})
 	//con setTImeout al socketio se cuelga el servidor al momento de auntenticarse
 	//mas de un usuario y dejar de usar el chat durane 2min
 	//setTimeout(mostrarconectados, 1000)
@@ -159,6 +171,6 @@ module.exports.desconectar=function (e) {
 	e.preventDefault()
 	var id=$(this).attr("data-id")
 	var urds=$(this).attr("href")
-	socket.emit("conects",{id:id})
+	socket.emit("conects",{id:id,se:2})
 	window.location.href=urds
 }
