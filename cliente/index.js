@@ -18,7 +18,7 @@ function inicio_pagina () {
 	$(".contchat").on("click","#ingnm",chat.ingreusuario)
 	$(".contchat").on("click","#btenv",chat.envmensaje)
 	$(".envmsjred").on("click","#btpv",chat.envmengenprv)
-	$("aduio").remove()
+	$("audio").remove()
 	contenido.colocarmenu()
 	if ($("#Tcot").length) {
 		contenido.colocarcont()

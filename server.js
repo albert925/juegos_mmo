@@ -43,6 +43,7 @@ app.get("/chat",function (req,res) {
 io.on("connection",function (socket) {
 	//console.log("conecto "+socket.id)
 	socket.on("conects",function (date) {
+		debugger
 		usuariBD.conects(function (resl) {
 			io.sockets.emit("conects",resl)
 		})
@@ -52,7 +53,7 @@ io.on("connection",function (socket) {
 	})
 	socket.on("chgen",function (fas) {
 		usuariBD.datosus(fas.id,function (resbd) {
-			//console.log(fas.id+"-"+fas.ms)
+			console.log(fas.id+"-"+fas.ms)
 			//console.log(resbd.idrd+"-"+fas.ms)
 			var mesji={
 				id:fas.id,

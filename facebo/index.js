@@ -14,6 +14,7 @@ passport.use(new facebookStra({
 	},
 	function (accessToken, refreshToken, profile, done) {
 		userbd.ingresarus(profile.id,profile.displayName,function (datbd) {
+			debugger
 			if (datbd != 1 || datbd != 3) {
 				var user={
 					idb:datbd.idus,

@@ -125,6 +125,7 @@ function writcadmsj (users,msj) {
 	return html
 }
 function writdosmsj (id,fa,msj) {
+	var ruta="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xaf1/v/t1.0-1/p160x160/12247054_558759300938104_7227626876387297265_n.jpg?oh=06b41d1eb1fbec3faae1354224385dc9&oe=571C325F&__gda__=1461068515_42673149520e4bdf2f426edf1b2ae737"
 	var html='<div id="mj'+id+'" class="cadjms">'
 				html+='<div class="avacj">'
 					html+='<figure style="background-image:url(https://graph.facebook.com/'+fa+'/picture);"></figure>'
@@ -190,6 +191,7 @@ module.exports.obtenerusIngr=function () {
 	var idrlru=idurl[4].split("#")
 	//console.log(idrlru[0])
 	$(".envmsjred input[type=submit]").attr("data-id",idrlru[0]+"-"+0)
+	$("#redicht").attr("data-id",idrlru[0])
 }
 module.exports.envmengenprv=function (ev) {
 	var idcht=$(this).attr("data-id")
@@ -222,7 +224,6 @@ function mostrarconectados () {
 	socket.emit("conects")
 	socket.on("conects",function (date) {
 		for (var icox = 0; icox < date.length; icox++) {
-			console.log(date[icox])
 			if (date[icox].conec=="1") {
 				if (!$("#usc_"+date[icox].id).length) {
 					$(".chatscd").prepend(wriconectados(date[icox].id,date[icox].idf,date[icox].name))
@@ -233,7 +234,7 @@ function mostrarconectados () {
 			}
 		}
 	})
-	setTimeout(mostrarconectados, 1000)
+	//setTimeout(mostrarconectados, 1000)
 }
 },{"jquery":8,"socket.io-client":9}],5:[function(require,module,exports){
 module.exports.loading=function () {
@@ -501,7 +502,7 @@ function inicio_pagina () {
 	$(".contchat").on("click","#ingnm",chat.ingreusuario)
 	$(".contchat").on("click","#btenv",chat.envmensaje)
 	$(".envmsjred").on("click","#btpv",chat.envmengenprv)
-	$("aduio").remove()
+	$("audio").remove()
 	contenido.colocarmenu()
 	if ($("#Tcot").length) {
 		contenido.colocarcont()
