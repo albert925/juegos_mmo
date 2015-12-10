@@ -139,7 +139,6 @@ module.exports.usersConects=function () {
 	mostrarconectados()
 }
 function mostrarconectados () {
-	socket.emit("conects")
 	socket.on("conects",function (date) {
 		for (var icox = 0; icox < date.length; icox++) {
 			if (date[icox].conec=="1") {
@@ -155,4 +154,11 @@ function mostrarconectados () {
 	//con setTImeout al socketio se cuelga el servidor al momento de auntenticarse
 	//mas de un usuario y dejar de usar el chat durane 2min
 	//setTimeout(mostrarconectados, 1000)
+}
+module.exports.desconectar=function (e) {
+	e.preventDefault()
+	var id=$(this).attr("data-id")
+	var urds=$(this).attr("href")
+	socket.emit("conects",{id:id})
+	window.location.href=urds
 }

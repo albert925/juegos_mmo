@@ -15,6 +15,7 @@ function inicio_pagina () {
 	$("#Tmns").on("click",".cambmn",contenido.mofmenu)
 	$("#nvct").on("click",contenido.nuevoct)
 	$("#nvig").on("click",contenido.subirimage)
+	$("#redicht").on("click",chat.desconectar)
 	$(".contchat").on("click","#ingnm",chat.ingreusuario)
 	$(".contchat").on("click","#btenv",chat.envmensaje)
 	$(".envmsjred").on("click","#btpv",chat.envmengenprv)

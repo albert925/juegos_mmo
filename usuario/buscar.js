@@ -12,6 +12,10 @@ module.exports.conectados=function (callback) {
 		callback(result)
 	}))
 }
+module.exports.desconectar=function (id) {
+	var reg="UPDATE usuarios set con_us='2' where id_us="+id
+	conexion.getConnection(modifG(reg))
+}
 function busqueduno (sql,callback) {
 	return function (err,conecT) {
 		if (err) {console.log(err)}
@@ -64,5 +68,11 @@ function qerudos (callback) {
 		else{
 			callback(2)
 		}
+	}
+}
+function modifG (sql) {
+	return function (err,conecT) {
+		if (err) {console.log(err)}
+		conecT.query(sql)
 	}
 }

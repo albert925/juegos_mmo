@@ -9,7 +9,6 @@ module.exports.ingresarus=function (id,usurio,callback) {
 		if (resul == 1) {
 			conexion.getConnection(ingre(ingresar,function (dosres) {
 				if (dosres == 2) {
-					debugger
 					conexion.getConnection(buscar(existe,function (tresres) {
 						conexion.getConnection(conectar(conect))
 						callback(tresres)
@@ -21,7 +20,6 @@ module.exports.ingresarus=function (id,usurio,callback) {
 			}))
 		}
 		else{
-			debugger
 			conexion.getConnection(conectar(conect))
 			callback(resul)
 		}

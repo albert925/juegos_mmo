@@ -15,3 +15,6 @@ module.exports.conects=function (callback) {
 		callback(result)
 	})
 }
+module.exports.desconect=function (id) {
+	buscar.desconectar(id)
+}
