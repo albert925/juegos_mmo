@@ -36,6 +36,7 @@ function inicio_pagina () {
 	if ($(".contYUchat").length) {
 		chat.obtenerusIngr()
 		chat.colocarmensprivado()
+		chat.usersConects()
 	}
 	chat.noticiacion()
 }

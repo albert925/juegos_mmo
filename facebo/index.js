@@ -42,7 +42,9 @@ faceb.get("/auth/facebook/callback",passport.authenticate("facebook",{
 	successRedirect: "/chat/bienvenido",
 	failureRedirect: '/chat/erroface'
 }))
-faceb.get("/chat/logout",function (req,res) {
+faceb.get("/chat/logout",ensureAuth,function (req,res) {
+	var usid=req.user.idb
+	userbd.desconectar(usid)
 	req.logout()
 	res.redirect("/chat")
 })
@@ -55,7 +57,6 @@ faceb.get("/chat/:id",ensureAuth,function (req,res) {
 	var idR=req.params.id
 	archivos.normal(req,res,"chatauten.html")
 })
-
 function ensureAuth (req,res,next) {
 	if (req.isAuthenticated()) {
 		return next()

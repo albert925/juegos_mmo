@@ -6,6 +6,12 @@ module.exports.general=function (id,callback) {
 		callback(result)
 	}))
 }
+module.exports.conectados=function (callback) {
+	var reg="SELECT * from usuarios where con_us='1' order by id_us asc"
+	conexion.getConnection(bustodoconect(reg,function (result) {
+		callback(result)
+	}))
+}
 function busqueduno (sql,callback) {
 	return function (err,conecT) {
 		if (err) {console.log(err)}
@@ -28,6 +34,34 @@ function qeruyuno (callback) {
 		}
 		else{
 			callback(1)
+		}
+	}
+}
+function bustodoconect (sql,callback) {
+	return function (err,conecT) {
+		if (err) {console.log(err)}
+		conecT.query(sql,qerudos(function (result) {
+			callback(result)
+		}))
+	}
+}
+function qerudos (callback) {
+	return function (err,result) {
+		var userC = new Array()
+		if (err) { return console.log(err)}
+		if (result.length>0) {
+			for (var i = 0; i < result.length; i++) {
+				var datus={
+					id:result[i].id_us,
+					idf:result[i].id_red,
+					name:result[i].nam_us
+				}
+				userC.push(datus)
+			}
+			callback(userC)
+		}
+		else{
+			callback(2)
 		}
 	}
 }

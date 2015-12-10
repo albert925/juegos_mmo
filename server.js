@@ -42,13 +42,18 @@ app.get("/chat",function (req,res) {
 
 io.on("connection",function (socket) {
 	//console.log("conecto "+socket.id)
+	socket.on("conects",function (date) {
+		usuariBD.conects(function (resl) {
+			io.sockets.emit("conects",resl)
+		})
+	})
 	socket.on("mensaje",function (msg) {
 		socket.broadcast.emit("mensaje",msg)
 	})
 	socket.on("chgen",function (fas) {
 		usuariBD.datosus(fas.id,function (resbd) {
-			console.log(fas.id+"-"+fas.ms)
-			console.log(resbd.idrd+"-"+fas.ms)
+			//console.log(fas.id+"-"+fas.ms)
+			//console.log(resbd.idrd+"-"+fas.ms)
 			var mesji={
 				id:fas.id,
 				idf:resbd.idrd,

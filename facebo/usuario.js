@@ -1,6 +1,7 @@
 var conexion = require("../router/base_datos")
 
 module.exports.ingresarus=function (id,usurio,callback) {
+	var conect="UPDATE usuarios set con_us='1' where id_red='"+id+"'"
 	var existe="SELECT * from usuarios where id_red='"+id+"'"
 	var ingresar="INSERT into usuarios(id_red,nam_us,tp_us,	es_us) "
 	ingresar+="values('"+id+"','"+usurio+"','1','1')"
@@ -9,6 +10,7 @@ module.exports.ingresarus=function (id,usurio,callback) {
 			conexion.getConnection(ingre(ingresar,function (dosres) {
 				if (dosres == 2) {
 					conexion.getConnection(buscar(existe,function (tresres) {
+						conexion.getConnection(conectar(conect))
 						callback(tresres)
 					}))
 				}
@@ -18,9 +20,15 @@ module.exports.ingresarus=function (id,usurio,callback) {
 			}))
 		}
 		else{
+			conexion.getConnection(conectar(conect))
 			callback(resul)
 		}
 	}))
+}
+module.exports.desconectar=function (id,callback) {
+	var deconect="UPDATE usuarios set con_us='2' where id_us='"+id+"'"
+	conexion.getConnection(conectar(deconect))
+	callback(2)
 }
 function buscar (sql,callback) {
 	return function (err,coneCT) {
@@ -57,5 +65,11 @@ function ingre (sql,callback) {
 		if (err) {console.log(err)}
 		conecT.query(sql)
 		callback(2)
+	}
+}
+function conectar (sql) {
+	return function (err ,conecT) {
+		if (err) {return console.log(err)}
+		conecT.query(sql)
 	}
 }

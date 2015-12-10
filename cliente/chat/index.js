@@ -53,6 +53,13 @@ function writdosmsj (id,fa,msj) {
 	html+='</div>'
 	return html
 }
+function wriconectados (id,fa,name) {
+	var html='<div id="usc_'+id+'" class="ous" data-id="'+id+'" data-fa="'+fa+'">'
+		html+='<figure style="background-image:url(https://graph.facebook.com/'+fa+'/picture);" title="'+name+'">'
+		html+='</figure>'
+	html+='</div>'
+	return html
+}
 module.exports.colocarusers=function () {
 	$(".envmsj").html(writeusuario)
 }
@@ -99,7 +106,7 @@ module.exports.obtenerusIngr=function () {
 	var urlobt=document.location.href
 	var idurl=urlobt.split("/")
 	var idrlru=idurl[4].split("#")
-	console.log(idrlru[0])
+	//console.log(idrlru[0])
 	$(".envmsjred input[type=submit]").attr("data-id",idrlru[0]+"-"+0)
 }
 module.exports.envmengenprv=function (ev) {
@@ -116,10 +123,23 @@ module.exports.envmengenprv=function (ev) {
 	return false
 }
 module.exports.colocarmensprivado=function () {
-	console.log(44)
 	socket.on("chgen",function (resms) {
-		$(".cjtcms").prepend(writdosmsj(resms.id,resms.idf,resms.mens))
+		var $cajachat = $(".cjtcms")
+		//prepend(de abajo arria) addpend(de arriba abajo)
+		//$(".cjtcms").prepend(writdosmsj(resms.id,resms.idf,resms.mens))
+		$(".cjtcms").append(writdosmsj(resms.id,resms.idf,resms.mens))
+		$(".cjtcms").animate({scrollTop: $cajachat.get(0).scrollHeight}, 1000)
 		$('<audio src="/audio/sonido.wav" autoplay type="audio/wav"></aduio>').appendTo("body")
 		console.log(resms)
+	})
+}
+module.exports.usersConects=function () {
+	socket.emit("conects")
+	socket.on("conects",function (date) {
+		for (var icox = 0; icox < date.length; icox++) {
+			date[icox]
+			console.log(date[icox])
+			$(".chatscd").prepend(wriconectados(date[icox].id,date[icox].idf,date[icox].name))
+		}
 	})
 }
