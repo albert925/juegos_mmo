@@ -19,6 +19,8 @@ function inicio_pagina () {
 	$(".contchat").on("click","#ingnm",chat.ingreusuario)
 	$(".contchat").on("click","#btenv",chat.envmensaje)
 	$(".envmsjred").on("click","#btpv",chat.envmengenprv)
+	$(".chatscd").on("click",".ous",chat.abrirprivado)
+	$(".flchats").on("click",".cambcht",chat.cambiarsalas)
 	$("body audio").remove()
 	contenido.colocarmenu()
 	if ($("#Tcot").length) {
@@ -38,6 +40,7 @@ function inicio_pagina () {
 		chat.obtenerusIngr()
 		chat.colocarmensprivado()
 		chat.usersConects()
+		chat.horizontal()
 	}
 	chat.noticiacion()
 }

@@ -41,9 +41,9 @@ app.get("/chat",function (req,res) {
 })
 
 io.on("connection",function (socket) {
-	//console.log("conecto "+socket.id)
+	console.log("conecto "+socket.id)
 	socket.on("conects",function (us) {
-		console.log(us)
+		//console.log(us)
 		if (us.se == 1) {
 			usuariBD.datosus(us.id,function (resus) {
 				socket.broadcast.emit("conects",{
@@ -59,8 +59,34 @@ io.on("connection",function (socket) {
 			socket.broadcast.emit("conects",us)
 		}
 	})
+	socket.on("colchat",function (div) {
+		console.log(div)
+		usuariBD.datosus(div.ide,function (divus) {
+			socket.broadcast.emit("colchat",{
+				id:div.id,
+				ide:div.ide,
+				na:divus.name
+			})
+		})
+	})
 	socket.on("mensaje",function (msg) {
 		socket.broadcast.emit("mensaje",msg)
+	})
+	socket.on("join",function (room) {
+		console.log(room)
+		socket.room = room
+		socket.join(room)
+	})
+	socket.on("chpv",function (pv) {
+		usuariBD.datosus(pv.id,function (respv) {
+			var mensajeD={
+				ide:pv.idE,
+				id:pv.id,
+				idf:respv.idrd,
+				mens:pv.ms
+			}
+			io.sockets.emit("chpv",mensajeD)
+		})
 	})
 	socket.on("chgen",function (fas) {
 		usuariBD.datosus(fas.id,function (resbd) {

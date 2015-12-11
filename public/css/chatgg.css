@@ -138,6 +138,7 @@ h1{
 		overflow-y: auto;
 		width: 80%;
 	}
+		.conti-msj .cjtcms.close{display: none;}
 	.conti-msj .chatscd{
 		border:1px solid blue;
 		height: 500px;

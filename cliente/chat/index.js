@@ -55,10 +55,19 @@ function writdosmsj (id,fa,msj) {
 	return html
 }
 function wriconectados (id,fa,name) {
-	var html='<div id="usc_'+id+'" class="ous" data-id="'+id+'" data-fa="'+fa+'">'
+	var html='<div id="usc_'+id+'" class="ous" data-id="'+id+'" data-fa="'+fa+'" data-nam="'+name+'">'
 		html+='<figure style="background-image:url(https://graph.facebook.com/'+fa+'/picture);" title="'+name+'">'
 		html+='</figure>'
 	html+='</div>'
+	return html
+}
+function agrecajachatpriv (id) {
+	var html='<div id="Sec'+id+'" class="cjtcms">'
+	html+='</div>'
+	return html
+}
+function agrechathz (id,name) {
+	var html='<div id="us'+id+'" class="cambcht" data-id="'+id+'">'+name+'</div>'
 	return html
 }
 module.exports.colocarusers=function () {
@@ -123,17 +132,34 @@ module.exports.envmengenprv=function (ev) {
 		$("#msjxx").focus()
 		return false
 	}
+	else{
+		var salaP="sal-"+geoprv[1]
+		socket.emit("join",salaP)
+		socket.emit("chpv",{idE:geoprv[1],id:geoprv[0],ms:msejpv})
+		$("#msjxx").val("")
+		$("#msjxx").focus()
+		return false
+	}
 	return false
 }
 module.exports.colocarmensprivado=function () {
 	socket.on("chgen",function (resms) {
-		var $cajachat = $(".cjtcms")
+		var $cajachat = $("#Pr")
 		//prepend(de abajo arria) addpend(de arriba abajo)
 		//$(".cjtcms").prepend(writdosmsj(resms.id,resms.idf,resms.mens))
-		$(".cjtcms").append(writdosmsj(resms.id,resms.idf,resms.mens))
-		$(".cjtcms").animate({scrollTop: $cajachat.get(0).scrollHeight}, 1000)
+		$("#Pr").append(writdosmsj(resms.id,resms.idf,resms.mens))
+		$("#Pr").animate({scrollTop: $cajachat.get(0).scrollHeight}, 1000)
 		$('<audio src="/audio/sonido.wav" autoplay type="audio/wav"></aduio>').appendTo("body")
 		console.log(resms)
+	})
+	socket.on("chpv",function (resmsb) {
+		var $cajachat = $("#Sec"+resmsb.ide)
+		console.log(resmsb)
+		console.log($cajachat)
+		$("#Sec"+resmsb.ide).append(writdosmsj(resmsb.id,resmsb.idf,resmsb.mens))
+		$("#Sec"+resmsb.ide).animate({scrollTop: $cajachat.get(0).scrollHeight}, 1000)
+		$('<audio src="/audio/sonido.wav" autoplay type="audio/wav"></aduio>').appendTo("body")
+		console.log(resmsb)
 	})
 }
 module.exports.usersConects=function () {
@@ -155,11 +181,14 @@ function mostrarconectados () {
 	socket.on("conects",function (us) {
 		if (us.se==2) {
 			$("#usc_"+us.id).remove()
+			$(".flchats #us"+us.id).remove()
 		}
 		else{
 			if(!us == undefined || !us == ""){
-				console.log(us)
-				$(".chatscd").prepend(wriconectados(us.id,us.idf,us.name))
+				if (!$("#usc_"+us.id).length) {
+					console.log(us)
+					$(".chatscd").prepend(wriconectados(us.id,us.idf,us.name))
+				}
 			}
 		}
 	})
@@ -173,4 +202,61 @@ module.exports.desconectar=function (e) {
 	var urds=$(this).attr("href")
 	socket.emit("conects",{id:id,se:2})
 	window.location.href=urds
+}
+module.exports.abrirprivado=function () {
+	var urlobt=document.location.href
+	var idurl=urlobt.split("/")
+	var idrlru=idurl[4].split("#")
+	var idusv = $(this).attr("data-id")
+	var idfav = $(this).attr("data-fa")
+	var nachv = $(this).attr("data-nam").split(" ")
+	if (idrlru[0]!=idusv) {
+		if (!$("#Sec"+idusv).length) {
+			$(".conti-msj").prepend(agrecajachatpriv(idusv))
+		}
+		$(".conti-msj .cjtcms").css({display:"none"})
+		$("#Sec"+idusv).css({display:"block"})
+		socket.emit("colchat",{id:idusv,fa:idfav,ide:idrlru[0]})
+		if (!$("#us"+idusv).length) {
+			$(".flchats").append(agrechathz(idusv,nachv[0]))
+			$("#btpv").attr("data-id",idrlru[0]+"-"+idusv)
+		}
+	}
+}
+module.exports.horizontal=function () {
+	var urlobt=document.location.href
+	var idurl=urlobt.split("/")
+	var idrlru=idurl[4].split("#")
+	socket.on("colchat",function (minch) {
+		nachv=minch.na.split(" ")
+		console.log(minch)
+		if (!$("#us"+minch.id).length) {
+			if (idrlru[0] == minch.id) {
+				if (!$("#Sec"+minch.id).length) {
+					$(".conti-msj").prepend(agrecajachatpriv(minch.id))
+				}
+				$(".flchats").append(agrechathz(minch.id,nachv[0]))
+				$("#btpv").attr("data-id",idrlru[0]+"-"+minch.id)
+				$(".conti-msj .cjtcms").css({display:"none"})
+				$("#Sec"+minch.id).css({display:"block"})
+			}
+		}
+	})
+}
+module.exports.cambiarsalas=function () {
+	var urlobt=document.location.href
+	var idurl=urlobt.split("/")
+	var idrlru=idurl[4].split("#")
+	var ids=$(this).attr("data-id")
+	console.log(ids)
+	if (ids == "0") {
+		$(".conti-msj .cjtcms").css({display:"none"})
+		$("#Pr").css({display:"block"})
+		$("#btpv").attr("data-id",idrlru[0]+"-"+ids)
+	}
+	else{
+		$(".conti-msj .cjtcms").css({display:"none"})
+		$("#Sec"+ids).css({display:"block"})
+		$("#btpv").attr("data-id",idrlru[0]+"-"+ids)
+	}
 }
