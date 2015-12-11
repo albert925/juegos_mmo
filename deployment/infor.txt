@@ -1,0 +1,1 @@
+chmod +x provision.sh //permisos de escritura
