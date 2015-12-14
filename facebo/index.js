@@ -7,8 +7,8 @@ var otrosUS = require("../usuario")
 var faceb = express.Router()
 
 passport.use(new facebookStra({
-	clientID: 903182466456322,
-	clientSecret: "3dcacd58bdb6b344a55ea407978dc7a6",
+	clientID: "id_faceboook",
+	clientSecret: "clientefacebook",
 	callbackURL: 'http://localhost:3000/auth/facebook/callback',
 	enableProof: false
 	},

@@ -1,1 +1,8 @@
+dig ip o con dominio
 chmod +x provision.sh //permisos de escritura
+
+instalar el nxgin antes de ejecutar deploy
+//iniciar
+
+service juegos1 status [cada uno de los nodos]
+tail -f /var/log/upstart/juegos1.log [nodo]
