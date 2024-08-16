@@ -27,7 +27,7 @@
     "express": "^4.13.3",
     "express-session": "^1.12.1",
     "http-body-parse": "^2.0.1",
-    "install": "^0.4.0",
+    "install": "^0.13.0",
     "jquery": "^2.1.4",
     "jquery-background-video": "^1.0.0",
     "md5": "^2.0.0",
