@@ -31,7 +31,7 @@
     "jquery": "^2.1.4",
     "jquery-background-video": "^1.0.0",
     "md5": "^2.0.0",
-    "multer": "^1.1.0",
+    "multer": "^2.0.1",
     "mysql": "^2.9.0",
     "npm": "^3.5.1",
     "passport": "^0.3.2",
